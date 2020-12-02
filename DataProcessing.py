@@ -22,11 +22,32 @@ resolvedBugCount = connect_db(bugSql.sql_resolved_bug_count(3))
     #if Nowday==day :
     #    print(True)
 Dev_list = list()
-Dev_dirct = dict()
-for dirctResolve in resolvedBugCount:
-    print(dirctResolve['resolvedBugCount'],dirctResolve['resolvedBy'])
-    for dirctFix in fixedGreaterOne:
-        if dirctResolve['resolvedBy']==dirctFix['resolvedBy']:
-            Dev_dirct['name'] = dirctFix['resolvedBy']
-            Dev_dirct['fixedGreaterOneCount'] = dirctFix['fixedGreaterOneCount']
-            Dev_dirct['resolvedBugCount'] = dirctResolve['resolvedBugCount']
+Dev_dict = dict()
+index = 0
+
+for dictResolve in resolvedBugCount:
+    for dictFix in fixedGreaterOne:
+        if dictResolve['resolvedBy']==dictFix['resolvedBy']:
+            Dev_dict['name'] = dictFix['realname']
+            #Dev_dict['fixedGreaterOneCount'] = dictFix['fixedGreaterOneCount']
+            #Dev_dict['resolvedBugCount'] = dictResolve['resolvedBugCount']
+            Dev_dict['reOpenRate'] = '{:.2%}'.format(dictFix['fixedGreaterOneCount']/dictResolve['resolvedBugCount'])
+            print(Dev_dict['name'],Dev_dict['reOpenRate'])
+            Dev_list.append(Dev_dict)  
+
+for dictResolve in resolvedBugCount:
+    while(index<len(fixedGreaterOne)):
+        if dictResolve['resolvedBy']== fixedGreaterOne[index]['resolvedBy']:
+            Dev_dict['name'] = dictResolve['realname']
+            #Dev_dict['fixedGreaterOneCount'] = dictFix['fixedGreaterOneCount']
+            #Dev_dict['resolvedBugCount'] = dictResolve['resolvedBugCount']
+            Dev_dict['reOpenRate'] = '{:.2%}'.format(fixedGreaterOne[index]['fixedGreaterOneCount']/dictResolve['resolvedBugCount'])
+            print(Dev_dict['name'],Dev_dict['reOpenRate'])
+            index  = index + 1
+            Dev_list.append(Dev_dict)
+        break
+
+for res in Dev_list:
+    print(res)
+
+        
