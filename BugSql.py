@@ -4,7 +4,7 @@ class bugSql:
     # 今天的新增bug数
     @staticmethod
     def sql_active_bug_nowDay(productId):
-        return "select count(*) as bugCount,assignedTo from zt_bug where deleted = '0' and status = 'active' and %s<=assignedDate and product = %s group by assignedTo" %("DATE_FORMAT(CURDATE(),'%Y-%m-%d %H:%i:%s')",productId)
+        return "select count(*) as bugCount,assignedTo from zt_bug where deleted = '0' and status = 'active' and %s <=assignedDate and product = %s group by assignedTo" %("DATE_FORMAT(CURDATE(),'%Y-%m-%d %H:%i:%s')",productId)
     
     # 每天新增Bug数
     @staticmethod
