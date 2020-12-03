@@ -4,7 +4,7 @@ def connect_db(sql):
     connection = pymysql.connect(
     host='localhost',
     user ='root',
-    password = 'root',
+    password = '123456',
     db = 'zentao',
     charset='utf8mb4',
     cursorclass=pymysql.cursors.DictCursor
